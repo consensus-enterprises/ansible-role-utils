@@ -1,0 +1,20 @@
+---
+#    bind_mounts:
+#      - /var/aegir/backups
+#      - /var/lib/mysql
+
+- name: Copy any existing data into mounted volumes.
+  synchronize:
+    src: "{{ item }}"
+    dest: "/opt{{ item }}"
+  delegate_to: "{{ inventory_hostname }}"
+  loop: "{{ bind_mounts }}"
+
+- name: Set up bind mounts.
+  mount:
+    path: "{{ item }}"
+    src: "/opt{{ item }}"
+    opts: bind
+    state: mounted
+    fstype: none
+  loop: "{{ bind_mounts }}"

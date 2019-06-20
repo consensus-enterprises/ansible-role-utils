@@ -1,0 +1,13 @@
+---
+- name: Ensure PHP CLI config directory exists.
+  file:
+    dest: /etc/php/7.2/cli/conf.d/
+    state: directory
+
+- name: Increase PHP CLI memory limit.
+  copy:
+    content: |
+      ; configuration for increasing PHP CLI memory limit
+      ; priority=20
+      memory_limit = 512M
+    dest: /etc/php/7.2/cli/conf.d/20-memory_limit.ini
