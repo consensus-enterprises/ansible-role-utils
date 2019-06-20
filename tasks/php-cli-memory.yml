@@ -9,5 +9,5 @@
     content: |
       ; configuration for increasing PHP CLI memory limit
       ; priority=20
-      memory_limit = 512M
+      memory_limit = {{ php_cli_memory_limit }}
     dest: /etc/php/7.2/cli/conf.d/20-memory_limit.ini

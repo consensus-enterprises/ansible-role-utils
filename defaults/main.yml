@@ -1,2 +1,2 @@
 ---
-# defaults file for consensus.utils
+php_cli_memory_limit: "512M"  
