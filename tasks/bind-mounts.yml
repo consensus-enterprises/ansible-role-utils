@@ -1,0 +1,10 @@
+---
+
+- name: Set up bind mounts.
+  include_tasks: bind-mount.yml
+  vars:
+    bind_mount: "{{ utils_bind_mount }}"
+  loop: "{{ utils_bind_mounts | dict2items }}"
+  loop_control:
+    loop_var: utils_bind_mount
+

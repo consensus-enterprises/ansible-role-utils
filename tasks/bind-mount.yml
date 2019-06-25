@@ -1,18 +1,29 @@
 ---
-#    bind_mounts:
-#      - /var/aegir/backups
-#      - /var/lib/mysql
+# bind_mounts:
+#   '/var/aegir/backups':
+#     src: '/opt/var/aegir/backups'
+#     owner: aegir
+#     group: aegir
+#   '/var/lib/mysql':
+#     src: '/opt/var/lib/mysql'
 
-- name: "Copy any existing data in {{ bind_mount_dest }} into mounted volume at {{ bind_mount_src }}."
+- name: "Copy any existing data in {{ bind_mount.key }} into mounted volume at {{ bind_mount.value.src }}."
   synchronize:
-    src: "{{ bind_mount_dest }}"
-    dest: "{{ bind_mount_src }}"
+    src: "{{ bind_mount.key }}/"
+    dest: "{{ bind_mount.value.src }}"
   delegate_to: "{{ inventory_hostname }}"
 
-- name: "Set up bind mounts for {{ bind_mount_dest }}."
+- name: "Set up bind mounts for {{ bind_mount.key }}."
   mount:
-    path: "{{ bind_mount_dest }}"
-    src: "{{ bind_mount_src }}"
+    path: "{{ bind_mount.key }}"
+    src: "{{ bind_mount.value.src }}"
     opts: bind
     state: mounted
     fstype: none
+
+- name: Set proper ownership of bind mount.
+  file:
+    path: "{{ bind_mount.key }}"
+    owner: "{{ bind_mount.value.owner }}"
+    group: "{{ bind_mount.value.group }}"
+  when: bind_mount.value.owner is defined and bind_mount.value.group is defined
