@@ -6,6 +6,8 @@
 #     group: aegir
 #   '/var/lib/mysql':
 #     src: '/opt/var/lib/mysql'
+#
+# TODO: consider adding a service key per mount that tells us what services to disable before mucking about in the data on disk.
 
 - name: "Copy any existing data in {{ bind_mount.key }} into mounted volume at {{ bind_mount.value.src }}."
   synchronize:
