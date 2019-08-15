@@ -43,11 +43,12 @@ Feature: Running Ansible against localhost
      And the file "/etc/php/7.2/cli/conf.d/20-memory_limit.ini" should contain:
      """
      This file is managed by Ansible. Any changes will be reverted. See the infrastructure repository to apply persistent changes to this file.
+     419M
      """
-     When I run "cat /etc/php/7.2/cli/conf.d/20-memory_limit.ini"
+     When I run "php --ini"
      Then I should get:
      """
-     419M
+     /etc/php/7.2/cli/conf.d/20-memory_limit.ini
      """
      When I run "php -i|grep memory_limit"
      Then I should get:
