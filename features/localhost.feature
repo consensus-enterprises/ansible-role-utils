@@ -22,6 +22,7 @@ Feature: Running Ansible against localhost
      419M
      """
 
+  @debug
   Scenario: Run Ansible test playbook to change localhost PHP CLI memory limit
      Given I run "php -i|grep memory_limit"
      And I do not get:
@@ -35,11 +36,6 @@ Feature: Running Ansible against localhost
      TASK [consensus.utils : Increase PHP CLI memory limit.]
      changed: [localhost]
      """
-     When I run "php -i|grep memory_limit"
-     Then I should get:
-     """
-     419M
-     """
      And the following files should exist:
      """
      /etc/php/7.2/cli/conf.d/20-memory_limit.ini
@@ -47,6 +43,16 @@ Feature: Running Ansible against localhost
      And the file "/etc/php/7.2/cli/conf.d/20-memory_limit.ini" should contain:
      """
      This file is managed by Ansible. Any changes will be reverted. See the infrastructure repository to apply persistent changes to this file.
+     """
+     When I run "cat /etc/php/7.2/cli/conf.d/20-memory_limit.ini"
+     Then I should get:
+     """
+     419M
+     """
+     When I run "php -i|grep memory_limit"
+     Then I should get:
+     """
+     419M
      """
      # Test idempotence:
      #TODO: make this a make target
