@@ -1,0 +1,26 @@
+image: php:7.2
+
+stages:
+  - test
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+fast-tests: &test-defaults
+  stage: test
+  before_script:
+    # Install Git and GNU Make
+    - apt-get update -yqq
+    - apt-get install -yqq git make
+    # TODO: Figure out a way to intall these system packages as dependecies of
+    # the targets that use them.
+    - apt-get install -yqq python-pip unzip
+    - pip install jinja2-cli PyYAML ntfy[matrix]
+  script:
+    - source d
+    - make run-behat-ci
+
+slow-tests:
+  <<: *test-defaults
+  variables:
+    BEHAT_CI_TAGS: slow
