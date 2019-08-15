@@ -1,5 +1,10 @@
 ---
 - hosts: localhost
-  remote_user: root
-  roles:
-    - consensus.utils
+  remote_user: ubuntu
+
+  tasks:
+
+  - name: Set PHP CLI memory limit
+    include_role:
+      name: consensus.utils
+      tasks_from: php-cli-memory.yml
