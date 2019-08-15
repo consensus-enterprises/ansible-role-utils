@@ -9,3 +9,5 @@
     include_role:
       name: consensus.utils
       tasks_from: php-cli-memory.yml
+    vars:
+      php_cli_memory_limit: "419M" # Use an unusual value we are unlikely to find preconfigured in the wild.
