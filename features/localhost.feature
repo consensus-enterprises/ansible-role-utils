@@ -8,8 +8,7 @@ Feature: Running Ansible against localhost
      """
      /etc/php/7.2/cli/conf.d/20-memory_limit.ini
      """
-     #TODO: make this a make target; make tests/test.yml and tests/inventory overridable 
-     When I run "ansible-playbook tests/test.yml -i tests/inventory --connection=local --check"
+     When I run "make ansible-role-check"
      Then I should get:
      """
      TASK [consensus.utils : Increase PHP CLI memory limit.]
@@ -25,8 +24,7 @@ Feature: Running Ansible against localhost
      """
      /etc/php/7.2/cli/conf.d/20-memory_limit.ini
      """
-     #TODO: make this a make target
-     When I run "ansible-playbook tests/test.yml -i tests/inventory --connection=local"
+     When I run "make ansible-role-test"
      Then I should get:
      """
      TASK [consensus.utils : Increase PHP CLI memory limit.]
@@ -42,9 +40,17 @@ Feature: Running Ansible against localhost
      419M
      """
      # Test idempotence:
-     #TODO: make this a make target
-     When I run "ansible-playbook tests/test.yml -i tests/inventory --connection=local"
+     When I run "make ansible-role-test"
      Then I should not get:
      """
      changed: [localhost]
+     """
+
+  @wip
+  Scenario: When not running in CI, we need to clean up.
+     # Clean up:
+     When I run "sudo rm /etc/php/7.2/cli/conf.d/20-memory_limit.ini"
+     Then the following files should not exist:
+     """
+     /etc/php/7.2/cli/conf.d/20-memory_limit.ini
      """
