@@ -46,6 +46,8 @@ Feature: Running Ansible against localhost
      419M
      """
      When I run "php --ini"
+     And I run "ls -la /usr/local/etc/php/conf.d/"
+     And I run "cat /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini"
      Then I should get:
      """
      /etc/php/7.2/cli/conf.d/20-memory_limit.ini
