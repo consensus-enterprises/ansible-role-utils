@@ -23,7 +23,6 @@ Feature: Running Ansible against localhost
       ./20-memory_limit.ini
       """
 
-  @debug
   Scenario: Run Ansible test playbook to change localhost PHP CLI memory limit
      Given I run "sudo mv /etc/php/7.2/cli/conf.d/20-memory_limit.ini . || /bin/true"
      Then the following files should not exist:
