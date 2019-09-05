@@ -6,12 +6,7 @@
   become: yes
 
 - name: Increase PHP CLI memory limit.
-  copy:
-    content: |
-      ; {{ ansible_managed }}
-      ;
-      ; configuration for increasing PHP CLI memory limit
-      ; priority=20
-      memory_limit = {{ php_cli_memory_limit }}
+  template:
+    src: memory_limit.ini.j2
     dest: /etc/php/7.2/cli/conf.d/20-memory_limit.ini
   become: yes
