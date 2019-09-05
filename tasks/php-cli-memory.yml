@@ -8,7 +8,8 @@
 - name: Increase PHP CLI memory limit.
   copy:
     content: |
-      ; This file is managed by Ansible. Any changes will be reverted. See the infrastructure repository to apply persistent changes to this file.
+      ; {{ ansible_managed }}
+      ;
       ; configuration for increasing PHP CLI memory limit
       ; priority=20
       memory_limit = {{ php_cli_memory_limit }}
