@@ -3,6 +3,7 @@
   file:
     dest: /etc/php/7.2/cli/conf.d/
     state: directory
+  become: yes
 
 - name: Increase PHP CLI memory limit.
   copy:
@@ -12,3 +13,4 @@
       ; priority=20
       memory_limit = {{ php_cli_memory_limit }}
     dest: /etc/php/7.2/cli/conf.d/20-memory_limit.ini
+  become: yes
