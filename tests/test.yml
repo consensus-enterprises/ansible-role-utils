@@ -6,7 +6,7 @@
   vars:
     # We cannot use the `ansible_managed` provided by our default `ansible.cfg`.
     # See: https://docs.ansible.com/ansible/latest/reference_appendices/config.html#cfg-in-world-writable-dir
-    ansible_managed: "Test run."
+    ansible_managed: "This file is managed by Ansible. Any changes will be reverted. See the infrastructure repository to apply persistent changes to this file."
 
   tasks:
 
