@@ -3,6 +3,11 @@
   become: yes
   become_user: root
 
+  vars:
+    # We cannot use the `ansible_managed` provided by our default `ansible.cfg`.
+    # See: https://docs.ansible.com/ansible/latest/reference_appendices/config.html#cfg-in-world-writable-dir
+    ansible_managed: "Test run."
+
   tasks:
 
   - name: Set PHP CLI memory limit
