@@ -14,6 +14,7 @@
     src: "{{ bind_mount.key }}/"
     dest: "{{ bind_mount.value.src }}"
   delegate_to: "{{ inventory_hostname }}"
+  become: yes
 
 - name: "Set up bind mounts for {{ bind_mount.key }}."
   mount:
@@ -22,10 +23,12 @@
     opts: bind
     state: mounted
     fstype: none
+  become: yes
 
 - name: Set proper ownership of bind mount.
   file:
     path: "{{ bind_mount.key }}"
     owner: "{{ bind_mount.value.owner }}"
     group: "{{ bind_mount.value.group }}"
+  become: yes
   when: bind_mount.value.owner is defined and bind_mount.value.group is defined
