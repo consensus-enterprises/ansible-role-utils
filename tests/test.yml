@@ -8,11 +8,12 @@
     # See: https://docs.ansible.com/ansible/latest/reference_appendices/config.html#cfg-in-world-writable-dir
     ansible_managed: "This file is managed by Ansible. Any changes will be reverted. See the infrastructure repository to apply persistent changes to this file."
 
-  tasks:
-
-  - name: Set PHP CLI memory limit
-    include_role:
-      name: consensus.utils
-      tasks_from: php-cli-memory.yml
-    vars:
-      php_cli_memory_limit: "419M" # Use an unusual value we are unlikely to find preconfigured in the wild.
+# TODO: move this test to our geerlingguy.php fork, as that's where we moved the task.
+#  tasks:
+#
+#  - name: Set PHP CLI memory limit
+#    include_role:
+#      name: consensus.utils
+#      tasks_from: php-cli-memory.yml
+#    vars:
+#      php_cli_memory_limit: "419M" # Use an unusual value we are unlikely to find preconfigured in the wild.
