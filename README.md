@@ -9,6 +9,8 @@ Usage
 In your role, include the task file desired. Right now the only task available
 ensures the creation of bind mounts; more may be added in future.
 
+See also [example playbook](#example-playbook) below.
+
 Bind Mounts
 -----------
 
