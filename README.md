@@ -6,13 +6,13 @@ This role provides a library of tasks that can be shared between roles.
 Usage
 -----
 
-In your role, inclue the task file desired. Right now the only task available
+In your role, include the task file desired. Right now the only task available
 ensures the creation of bind mounts; more may be added in future.
 
 Bind Mounts
 -----------
 
-Use the `bind-mounts.yml` tasks to create bind mounts on the target server. 
+Use the `bind-mounts.yml` tasks to create [bind mounts](https://unix.stackexchange.com/questions/198590/what-is-a-bind-mount) on the target server.
 
 To configure this task, populate the `bind_mounts` list variable. The format is:
 
@@ -55,6 +55,11 @@ Example Playbook
         '/var/lib/mysql':
           src: '/opt/var/lib/mysql'
 ```
+
+Dependencies
+------------
+
+None, other than Ansible itself; this is all accomplished with Ansible builtins.
 
 License
 -------
